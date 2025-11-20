@@ -4,8 +4,8 @@ using UnityEngine.Experimental.Rendering;
 public class player : MonoBehaviour
 {
     Rigidbody2D rb;
-    public int thrust;
-    public float thrustSpeed = 5;
+    public int thrust = 1;
+    public float thrustSpeed = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
