@@ -15,11 +15,17 @@ public class NPC : MonoBehaviour
    // public Vector2 movement;
     public float PlayerVelocity = 0;
     public bool ismoving;
-    
+
+    Color head_Color;
+    public SpriteRenderer sr;
+    SpriteRenderer head;
+    public int unitchangecolor;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = player.GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         StartCoroutine(RotationHandler());
     }
 
@@ -30,7 +36,7 @@ public class NPC : MonoBehaviour
         if (isInDeathZone == true)
         {
             PlayerVelocity = rb.linearVelocity.magnitude;
-            if (PlayerVelocity > 0 )
+            if (PlayerVelocity > 0.01f )
             {
                 ismoving = true;
                 Destroy(player);
@@ -41,6 +47,8 @@ public class NPC : MonoBehaviour
         {
             ismoving = false;
         }
+
+        
 
         /*movement = new Vector2(Input.)
         if (Input.GetKey(KeyCode.D))
@@ -67,18 +75,25 @@ public class NPC : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(new Vector3(0, 0, transform.localRotation.eulerAngles.z + degreesPerSec * Time.deltaTime));
                 transform.localScale = new Vector3(1, -1, -1);   
         }*/
-      
+
 
         if (startRotate == true)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+            //Ändra färg till rött
+            //Kommunicera med ett objekts spriterenderer
+            sr.color = Color.green; // go 
         }
         else 
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            //Ändra färg till grönt 
+            //Kommunicera med ett objekts spriterenderer
+             sr.color = Color.red; // stop
+            
         }
-        
-        }
+
+    }
     // -178.699
 
     private void FixedUpdate()
