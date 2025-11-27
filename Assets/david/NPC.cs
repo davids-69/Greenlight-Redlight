@@ -9,8 +9,10 @@ public class NPC : MonoBehaviour
    // public float degreesPerSec;
     public bool startRotate = false;
     private bool isInDeathZone;
-    
-    
+    public bool goalzone;
+
+
+
     public Rigidbody2D rb;
    // public Vector2 movement;
     public float PlayerVelocity = 0;
@@ -33,20 +35,23 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isInDeathZone == true)
+        if (isInDeathZone == true && GameObject.FindGameObjectWithTag("Goal").GetComponent<goal>().Goalzone == false)
         {
             PlayerVelocity = rb.linearVelocity.magnitude;
-            if (PlayerVelocity > 0.01f )
+            if (PlayerVelocity > 0.01f)
             {
                 ismoving = true;
                 Destroy(player);
+
 
             }
         }
         else
         {
             ismoving = false;
+            
         }
+            
 
         
 
