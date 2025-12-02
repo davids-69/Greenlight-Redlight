@@ -11,7 +11,9 @@ public class NPC : MonoBehaviour
     private bool isInDeathZone;
     public bool goalzone;
 
-
+    // loadscene
+    public GameObject gameoverwin;
+    
 
     public Rigidbody2D rb;
    // public Vector2 movement;
@@ -43,8 +45,9 @@ public class NPC : MonoBehaviour
                 ismoving = true;
                 Destroy(player);
 
-
+                gameoverwin.GetComponent<changescene>().ChangeScene("gameover");
             }
+
         }
         else
         {

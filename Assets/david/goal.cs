@@ -9,6 +9,8 @@ public class goal : MonoBehaviour
 
     public bool Goalzone = false;
 
+    public GameObject winner;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,13 +22,13 @@ public class goal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (player == collision.gameObject)
         {
             Goalzone = true;
+            winner.GetComponent<changescene>().ChangeScene("win");
 
 
         }
