@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+   public float passedtime = 0;
+   public float randomtimer = 0;
+   public float TimeToRotate = 0;
+
     [SerializeField] private float speed = 1.5f;
     public GameObject player;
     private bool HasLineOfSight = false;
@@ -37,6 +41,8 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        passedtime += Time.deltaTime;
+        TimeToRotate = randomtimer - passedtime;
         if (isInDeathZone == true && GameObject.FindGameObjectWithTag("Goal").GetComponent<goal>().Goalzone == false)
         {
             PlayerVelocity = rb.linearVelocity.magnitude;
@@ -47,12 +53,10 @@ public class NPC : MonoBehaviour
 
                 gameoverwin.GetComponent<changescene>().ChangeScene("gameover");
             }
-
         }
         else
         {
-            ismoving = false;
-            
+            ismoving = false;  
         }
             
 
@@ -98,11 +102,9 @@ public class NPC : MonoBehaviour
             //Ändra färg till grönt 
             //Kommunicera med ett objekts spriterenderer
              sr.color = Color.red; // stop
-            
         }
-
     }
-    // -178.699
+    
 
     private void FixedUpdate()
     {
@@ -124,16 +126,15 @@ public class NPC : MonoBehaviour
     {
         while (true)
         {
-            float randomtimer = Random.Range(1, 7);
+            randomtimer = Random.Range(1, 7);
+            passedtime = 0;
             yield return new WaitForSeconds(randomtimer);
             startRotate = !startRotate;
         }
     }
 
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
         if (player == other.gameObject)
         {
             isInDeathZone = true;

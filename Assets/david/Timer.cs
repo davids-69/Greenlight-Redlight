@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class timer : MonoBehaviour
 {
+    public GameObject gameoverwin;
+
     public int countdown = 60;
     public TMP_Text stats;
     public float Timer = 1;
@@ -24,8 +26,10 @@ public class timer : MonoBehaviour
         if(countdown == 0)
         {
             StopAllCoroutines();
+            gameoverwin.GetComponent<changescene>().ChangeScene("gameover");
         }
     } 
+            
 
     IEnumerator ttimer()
     {
@@ -33,8 +37,10 @@ public class timer : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             countdown -= 1;
+
+
         }
-        
+
     }
 }
     
